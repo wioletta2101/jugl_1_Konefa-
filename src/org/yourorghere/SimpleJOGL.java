@@ -92,9 +92,16 @@ public class SimpleJOGL implements GLEventListener {
 
         // Move the "drawing cursor" around
         gl.glTranslatef(-1.5f, 0.0f, -6.0f);
+        
+        gl.glBegin(GL.GL_TRIANGLES);
+            gl.glVertex3f(-1.0f,1.0f, -6.0f);
+            gl.glVertex3f(-2.0f, -1.0f, -6.0f);
+            gl.glVertex3f(0.0f, -1.0f, -6.0f);
+         gl.glEnd();
+            
 
         // Drawing Using Triangles
-        gl.glBegin(GL.GL_TRIANGLES);
+        /**gl.glBegin(GL.GL_TRIANGLES);
             gl.glColor3f(1.0f, 0.0f, 0.0f);    // Set the current drawing color to red
             gl.glVertex3f(0.0f, 1.0f, 0.0f);   // Top
             gl.glColor3f(0.0f, 1.0f, 0.0f);    // Set the current drawing color to green
@@ -114,7 +121,7 @@ public class SimpleJOGL implements GLEventListener {
             gl.glVertex3f(1.0f, -1.0f, 0.0f);  // Bottom Right
             gl.glVertex3f(-1.0f, -1.0f, 0.0f); // Bottom Left
         // Done Drawing The Quad
-        gl.glEnd();
+        gl.glEnd();*/
 
         // Flush all drawing operations to the graphics card
         gl.glFlush();
