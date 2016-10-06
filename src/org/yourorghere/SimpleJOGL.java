@@ -110,22 +110,7 @@ public class SimpleJOGL implements GLEventListener {
             gl.glVertex3f(-1.0f, -1.0f, 0.0f); // Bottom Left
         gl.glEnd();*/
         
-        //kolo 
-        gl.glBegin(GL.GL_TRIANGLE_FAN);
-        gl.glColor3f(0.0f,8.0f,7.0f);
-        float x,y,kat;
-        gl.glBegin(GL.GL_TRIANGLE_FAN);
-        gl.glVertex3f(0.0f,0.0f,-6.0f); //œrodek
-        for(kat = 0.0f; kat < (2.0f*Math.PI);
-        kat+=(Math.PI/32.0f))
-        {
-            x = 1.5f*(float)Math.sin(kat);
-            y = 1.5f*(float)Math.cos(kat);
-            gl.glVertex3f(x, y, -20.0f); //kolejne punkty
-        }
-        gl.glEnd();
-         
-            
+      
 
         // Drawing Using Triangles
         /**gl.glBegin(GL.GL_TRIANGLES);
@@ -153,6 +138,22 @@ public class SimpleJOGL implements GLEventListener {
         // Flush all drawing operations to the graphics card
         gl.glFlush();
     }
+    public void trojkat(GLAutoDrawable drawable, float x1,float x2,float x3,float y1,float y2,float y3)
+      {
+      
+       GL gl = drawable.getGL();
+      gl.glTranslatef(-1.5f, 0.0f, -6.0f);
+        gl.glBegin(GL.GL_TRIANGLES);
+           
+            gl.glVertex3f(0.0f, 1.0f, 0.0f);   // Top
+           
+            gl.glVertex3f(-1.0f, -1.0f, 0.0f); // Bottom Left
+           
+            gl.glVertex3f(1.0f, -1.0f, 0.0f);  
+         gl.glEnd();
+         
+      }
+            
 
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
