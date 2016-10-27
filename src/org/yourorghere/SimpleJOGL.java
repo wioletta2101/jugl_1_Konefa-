@@ -234,6 +234,7 @@ gl.glVertex3f(1.0f, -1.0f, 0.0f);  // Bottom Right
 gl.glVertex3f(-1.0f, -1.0f, 0.0f); // Bottom Left
 // Done Drawing The Quad
 gl.glEnd();*/
+/*
 gl.glBegin(GL.GL_QUADS);
 //œciana przednia
 gl.glColor3f(1.0f,0.0f,0.0f);
@@ -277,9 +278,9 @@ gl.glVertex3f(1.0f,1.0f,-1.0f);
 gl.glVertex3f(-1.0f,1.0f,-1.0f);
 gl.glVertex3f(-1.0f,1.0f,1.0f);
 gl.glVertex3f(1.0f,1.0f,1.0f);
-gl.glEnd();
+gl.glEnd();*/
 
-/*gl.glBegin(GL.GL_TRIANGLES);
+gl.glBegin(GL.GL_TRIANGLES);
 //trojkat1
 gl.glColor3f(1.0f,0.0f,0.0f);
 gl.glVertex3f(-1.0f,-1.0f,0.0f);
@@ -313,7 +314,7 @@ gl.glVertex3f(-1.0f,-1.0f,0.0f);
 gl.glVertex3f(-1.0f,1.0f,0.0f);
 gl.glVertex3f(1.0f,1.0f,0.0f);
 gl.glVertex3f(1.0f,-1.0f,0.0f);
-gl.glEnd();*/
+gl.glEnd();
 // Flush all drawing operations to the graphics card
 gl.glFlush();
 }
