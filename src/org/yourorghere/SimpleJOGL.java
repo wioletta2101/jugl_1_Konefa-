@@ -250,7 +250,44 @@ gl.glVertex3f(x, y, 0.0f);
 gl.glEnd();
 }
 
+void drzewko(GL gl){
+gl.glPushMatrix();
+gl.glColor3f(0.0f, 0.0f, 0.0f);
+walec(gl);
+gl.glTranslatef(0.0f, 0.0f, -1.0f);
 
+gl.glColor3f(0.5f, 0.5f, 0.0f);
+stozek(gl);
+
+gl.glTranslatef(0.0f, 0.0f, -1.0f);
+gl.glScalef(0.7f, 0.7f, 0.7f);
+stozek(gl);
+
+gl.glTranslatef(0.0f, 0.0f, -1.0f);
+gl.glScalef(0.9f, 0.9f, 0.9f);
+stozek(gl);
+gl.glPopMatrix();
+}
+
+void lasek(GL gl){
+    for(int j=0; j<3; j++){
+
+         gl.glTranslatef(0.0f, 2.5f, 0.0f);
+         gl.glPushMatrix();
+        for(int i=0; i<8; i++){
+            gl.glTranslatef(2.0f, 0.0f, 0.0f);
+            drzewko(gl);
+        }
+        gl.glPopMatrix();
+    }
+       
+    
+       
+                
+ }
+    
+    
+    
 
 
 public void display(GLAutoDrawable drawable) {
@@ -274,23 +311,25 @@ gl.glLightfv(GL.GL_LIGHT0,GL.GL_POSITION,lightPos,0); //pozycja ?wiat³a
 gl.glEnable(GL.GL_LIGHT0); //uaktywnienie ?ród³a ?wiat³a nr. 0
 gl.glEnable(GL.GL_COLOR_MATERIAL); //uaktywnienie ?ledzenia kolorów
 
+//drzewko(gl);
+lasek(gl);
 
-gl.glColor3f(0.0f, 0.0f, 0.0f);
-walec(gl);
-gl.glTranslatef(0.0f, 0.0f, -1.0f);
-
-
-
-gl.glColor3f(0.5f, 0.5f, 0.0f);
-stozek(gl);
-
-gl.glTranslatef(0.0f, 0.0f, -1.0f);
-gl.glScalef(0.7f, 0.7f, 0.7f);
-stozek(gl);
-
-gl.glTranslatef(0.0f, 0.0f, -1.0f);
-gl.glScalef(0.9f, 0.9f, 0.9f);
-stozek(gl);
+//gl.glColor3f(0.0f, 0.0f, 0.0f);
+//walec(gl);
+//gl.glTranslatef(0.0f, 0.0f, -1.0f);
+//
+//
+//
+//gl.glColor3f(0.5f, 0.5f, 0.0f);
+//stozek(gl);
+//
+//gl.glTranslatef(0.0f, 0.0f, -1.0f);
+//gl.glScalef(0.7f, 0.7f, 0.7f);
+//stozek(gl);
+//
+//gl.glTranslatef(0.0f, 0.0f, -1.0f);
+//gl.glScalef(0.9f, 0.9f, 0.9f);
+//stozek(gl);
 
 
 //kolory bêdš ustalane za pomocš glColor
