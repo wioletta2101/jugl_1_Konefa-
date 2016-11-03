@@ -118,9 +118,9 @@ gl.glEnable(GL.GL_CULL_FACE);*/
 gl.glEnable(GL.GL_LIGHTING); //uaktywnienie o?wietlenia
 //ustawienie parametrów ?ród³a ?wiat³a nr. 0
 gl.glLightfv(GL.GL_LIGHT0,GL.GL_AMBIENT,ambientLight,0); //swiat³o otaczajšce
-gl.glLightfv(GL.GL_LIGHT0,GL.GL_DIFFUSE,diffuseLight,0); //?wiat³o rozproszone
-gl.glLightfv(GL.GL_LIGHT0,GL.GL_SPECULAR,specular,0); //?wiat³o odbite
-gl.glLightfv(GL.GL_LIGHT0,GL.GL_POSITION,lightPos,0); //pozycja ?wiat³a
+gl.glLightfv(GL.GL_LIGHT0,GL.GL_DIFFUSE,diffuseLight,1); //?wiat³o rozproszone
+gl.glLightfv(GL.GL_LIGHT0,GL.GL_SPECULAR,specular,2); //?wiat³o odbite
+gl.glLightfv(GL.GL_LIGHT0,GL.GL_POSITION,lightPos,3); //pozycja ?wiat³a
 gl.glEnable(GL.GL_LIGHT0); //uaktywnienie ?ród³a ?wiat³a nr. 0
   gl.glEnable(GL.GL_COLOR_MATERIAL); //uaktywnienie œledzenia kolorów
         //kolory bêd¹ ustalane za pomoc¹ glColor
@@ -150,7 +150,7 @@ final float h = (float) width / (float) height;
 gl.glViewport(0, 0, width, height);
 gl.glMatrixMode(GL.GL_PROJECTION);
 gl.glLoadIdentity();
-glu.gluPerspective(45.0f, h, 1.0, 20.0);
+glu.gluPerspective(90.0f, h, 0.1, 60.0);
 gl.glMatrixMode(GL.GL_MODELVIEW);
 gl.glLoadIdentity();
 
