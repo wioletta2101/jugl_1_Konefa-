@@ -118,12 +118,12 @@ if(e.getKeyChar() == '6')
 if(e.getKeyChar() == '7')
 {
  koparka.kat4-=1.0f;
-System.out.println(koparka.kat1);
+System.out.println(koparka.kat4);
 }
 if(e.getKeyChar() == '8')
 {
  koparka.kat4+=1.0f;
-System.out.println(koparka.kat1);
+System.out.println(koparka.kat4);
 }
 
 
