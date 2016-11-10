@@ -21,6 +21,7 @@ import javax.media.opengl.glu.GLU;
 * This version is equal to Brian Paul's version 1.2 1999/10/21
 */
 public class SimpleJOGL implements GLEventListener {
+static Koparka koparka;
 
 private static float xrot = 0.0f, yrot = 0.0f;
 
@@ -102,7 +103,7 @@ public void init(GLAutoDrawable drawable) {
 
 GL gl = drawable.getGL();
 System.err.println("INIT GL IS: " + gl.getClass().getName());
-
+koparka = new Koparka();
 // Enable VSync
 gl.setSwapInterval(1);
 
@@ -150,7 +151,7 @@ final float h = (float) width / (float) height;
 gl.glViewport(0, 0, width, height);
 gl.glMatrixMode(GL.GL_PROJECTION);
 gl.glLoadIdentity();
-glu.gluPerspective(90.0f, h, 0.1, 60.0);
+glu.gluPerspective(100.0f, h, 0.1, 60.0);
 gl.glMatrixMode(GL.GL_MODELVIEW);
 gl.glLoadIdentity();
 
@@ -312,7 +313,8 @@ gl.glEnable(GL.GL_LIGHT0); //uaktywnienie ?ród³a ?wiat³a nr. 0
 gl.glEnable(GL.GL_COLOR_MATERIAL); //uaktywnienie ?ledzenia kolorów
 
 //drzewko(gl);
-lasek(gl);
+//lasek(gl);
+koparka.Rysuj(gl);
 
 //gl.glColor3f(0.0f, 0.0f, 0.0f);
 //walec(gl);
