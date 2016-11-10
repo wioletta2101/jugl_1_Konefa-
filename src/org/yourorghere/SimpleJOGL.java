@@ -86,12 +86,27 @@ if(e.getKeyChar() == 'l')
     lightPos = new float[]{lightPos[0]+0.1f, lightPos[0]+0.1f, lightPos[0]+0.1f, lightPos[0]+0.1f};
 
 if(e.getKeyChar() == '1')
- koparka.kat1-=1.0f;
+{
+    koparka.kat1-=1.0f;
+    if(koparka.kat1<-60.0f)
+    {
+       koparka.kat1=-60.0f;
+    }
+    System.out.println(koparka.kat1);
+}
 if(e.getKeyChar() == '2')
- koparka.kat1+=1.0f;
+{
+    koparka.kat1+=1.0f;
+    if(koparka.kat1>30.0f)
+    {
+       koparka.kat1=30.0f;
+    }
+    System.out.println(koparka.kat1);
+}
 
 if(e.getKeyChar() == '3')
  koparka.kat2-=1.0f;
+
 if(e.getKeyChar() == '4')
  koparka.kat2+=1.0f;
 
@@ -101,9 +116,15 @@ if(e.getKeyChar() == '6')
  koparka.kat3+=1.0f;
 
 if(e.getKeyChar() == '7')
+{
  koparka.kat4-=1.0f;
+System.out.println(koparka.kat1);
+}
 if(e.getKeyChar() == '8')
+{
  koparka.kat4+=1.0f;
+System.out.println(koparka.kat1);
+}
 
 
 }
