@@ -11,6 +11,13 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
+import com.sun.opengl.util.texture.Texture;
+import com.sun.opengl.util.texture.TextureIO;
+import java.io.File;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
+
 
 
 
@@ -21,6 +28,8 @@ import javax.media.opengl.glu.GLU;
 * This version is equal to Brian Paul's version 1.2 1999/10/21
 */
 public class SimpleJOGL implements GLEventListener {
+static BufferedImage image1 = null,image2 = null;
+static Texture t1 = null, t2 = null;
 static Koparka koparka;
 
 private static float xrot = 0.0f, yrot = 0.0f;
@@ -144,7 +153,7 @@ public void init(GLAutoDrawable drawable) {
 
 GL gl = drawable.getGL();
 System.err.println("INIT GL IS: " + gl.getClass().getName());
-koparka = new Koparka();
+//koparka = new Koparka();
 // Enable VSync
 gl.setSwapInterval(1);
 
@@ -177,7 +186,31 @@ gl.glEnable(GL.GL_LIGHT0); //uaktywnienie ?ród³a ?wiat³a nr. 0
         // Setup the drawing area and shading mode
         gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         gl.glShadeModel(GL.GL_SMOOTH); // try setting this to GL_FLAT and see what happens.
-    }
+
+try
+{
+image1 = ImageIO.read(new File("C:\\Users\\student.INFORMATYKA\\Documents\\NetBeansProjects1\\jugl_1_Konefa-\\src\\android.jpg"));
+image2 = ImageIO.read(new File("C:\\Users\\student.INFORMATYKA\\Documents\\NetBeansProjects1\\jugl_1_Konefa-\\src\\pokemon.jpg"));
+}
+catch(Exception exc)
+{
+JOptionPane.showMessageDialog(null, exc.toString());
+return;
+}
+
+t1 = TextureIO.newTexture(image1, false);
+t2 = TextureIO.newTexture(image2, false);
+gl.glTexEnvi(GL.GL_TEXTURE_ENV, GL.GL_TEXTURE_ENV_MODE,
+ GL.GL_BLEND | GL.GL_MODULATE);
+gl.glEnable(GL.GL_TEXTURE_2D);
+gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_REPEAT);
+gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_REPEAT);
+gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_NEAREST);
+gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_NEAREST);
+
+
+
+}
 
 
 public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
@@ -192,7 +225,7 @@ final float h = (float) width / (float) height;
 gl.glViewport(0, 0, width, height);
 gl.glMatrixMode(GL.GL_PROJECTION);
 gl.glLoadIdentity();
-glu.gluPerspective(100.0f, h, 0.1, 60.0);
+glu.gluPerspective(70.0f, h, 0.1, 60.0);
 gl.glMatrixMode(GL.GL_MODELVIEW);
 gl.glLoadIdentity();
 
@@ -355,7 +388,8 @@ gl.glEnable(GL.GL_COLOR_MATERIAL); //uaktywnienie ?ledzenia kolorów
 
 //drzewko(gl);
 //lasek(gl);
-koparka.Rysuj(gl);
+//koparka.Rysuj(gl);
+gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
 
 //gl.glColor3f(0.0f, 0.0f, 0.0f);
 //walec(gl);
@@ -432,51 +466,67 @@ gl.glVertex3f(1.0f, -1.0f, 0.0f);  // Bottom Right
 gl.glVertex3f(-1.0f, -1.0f, 0.0f); // Bottom Left
 // Done Drawing The Quad
 gl.glEnd();*/
-/*
+
 gl.glBegin(GL.GL_QUADS);
 //œciana przednia
 gl.glColor3f(1.0f,0.0f,0.0f);
 gl.glNormal3f(0.0f,0.0f,1.0f);
-gl.glVertex3f(-1.0f,-1.0f,1.0f);
-gl.glVertex3f(1.0f,-1.0f,1.0f);
-gl.glVertex3f(1.0f,1.0f,1.0f);
-gl.glVertex3f(-1.0f,1.0f,1.0f);
+gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
+gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
+gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,1.0f,1.0f);
+gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f,1.0f,1.0f);
+gl.glEnd();
+
+gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
+gl.glBegin(GL.GL_QUADS);
 //sciana tylnia
 gl.glColor3f(0.0f,1.0f,0.0f);
 gl.glNormal3f(0.0f,0.0f,-1.0f);
-gl.glVertex3f(-1.0f,1.0f,-1.0f);
-gl.glVertex3f(1.0f,1.0f,-1.0f);
-gl.glVertex3f(1.0f,-1.0f,-1.0f);
-gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,1.0f,-1.0f);
+gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(1.0f,1.0f,-1.0f);
+gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
+gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+gl.glEnd();
 //œciana lewa
+gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
+gl.glBegin(GL.GL_QUADS);
 gl.glColor3f(0.0f,0.0f,1.0f);
 gl.glNormal3f(-1.0f,0.0f,0.0f);
-gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-gl.glVertex3f(-1.0f,-1.0f,1.0f);
-gl.glVertex3f(-1.0f,1.0f,1.0f);
-gl.glVertex3f(-1.0f,1.0f,-1.0f);
+gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
+gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-1.0f,1.0f,1.0f);
+gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-1.0f,1.0f,-1.0f);
+gl.glEnd();
 //œciana prawa
+gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
+gl.glBegin(GL.GL_QUADS);
 gl.glColor3f(1.0f,1.0f,0.0f);
 gl.glNormal3f(1.0f,0.0f,0.0f);
-gl.glVertex3f(1.0f,1.0f,-1.0f);
-gl.glVertex3f(1.0f,1.0f,1.0f);
-gl.glVertex3f(1.0f,-1.0f,1.0f);
-gl.glVertex3f(1.0f,-1.0f,-1.0f);
+gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(1.0f,1.0f,-1.0f);
+gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(1.0f,1.0f,1.0f);
+gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
+gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
+gl.glEnd();
 //œciana dolna
+gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
+gl.glBegin(GL.GL_QUADS);
 gl.glColor3f(1.0f,0.0f,1.0f);
 gl.glNormal3f(0.0f,-1.0f,0.0f);
-gl.glVertex3f(-1.0f,-1.0f,1.0f);
-gl.glVertex3f(-1.0f,-1.0f,-1.0f);
-gl.glVertex3f(1.0f,-1.0f,-1.0f);
-gl.glVertex3f(1.0f,-1.0f,1.0f);
+gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,1.0f);
+gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,-1.0f,-1.0f);
+gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,-1.0f);
+gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(1.0f,-1.0f,1.0f);
+gl.glEnd();
 //œciana górna
+gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
+gl.glBegin(GL.GL_QUADS);
 gl.glColor3f(1.0f,2.0f,1.0f);
 gl.glNormal3f(0.0f,1.0f,0.0f);
-gl.glVertex3f(1.0f,1.0f,-1.0f);
-gl.glVertex3f(-1.0f,1.0f,-1.0f);
-gl.glVertex3f(-1.0f,1.0f,1.0f);
-gl.glVertex3f(1.0f,1.0f,1.0f);
-gl.glEnd();*/
+gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(1.0f,1.0f,-1.0f);
+gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-1.0f,1.0f,-1.0f);
+gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-1.0f,1.0f,1.0f);
+gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(1.0f,1.0f,1.0f);
+gl.glEnd();
 
 /*gl.glBegin(GL.GL_TRIANGLES);
 //trojkat1
