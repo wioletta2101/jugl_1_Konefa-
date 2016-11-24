@@ -33,6 +33,7 @@ static Texture t1 = null, t2 = null, t3 = null;
 static Koparka koparka;
 
 private static float xrot = 0.0f, yrot = 0.0f;
+static float x, z;
 
 public static float ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };//swiat³o otaczajšce
 public static float diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };//?wiat³o rozproszone
@@ -135,6 +136,14 @@ if(e.getKeyChar() == '8')
 System.out.println(koparka.kat4);
 }
 
+if(e.getKeyCode() == KeyEvent.VK_F1){
+    przesun(-1.0f);
+    
+}
+if(e.getKeyCode() == KeyEvent.VK_F2){
+    przesun(1.0f);
+}
+
 
 }
 public void keyReleased(KeyEvent e){}
@@ -210,7 +219,7 @@ gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_REPEAT);
 gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_NEAREST);
 gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_NEAREST);
 
-
+koparka = new Koparka();
 
 }
 
@@ -362,6 +371,15 @@ void lasek(GL gl){
        
                 
  }
+
+static void przesun(float d) {
+   
+    if(x > -100 && z < 100)
+    {
+        x-=d*Math.sin(yrot*(3.14f/180.0f));
+        z+=d*Math.cos(yrot*(3.14f/180.0f));
+    }
+}
     
 void Rysuj(GL gl, Texture t1, Texture t2, Texture t3)
  {
@@ -369,6 +387,9 @@ void Rysuj(GL gl, Texture t1, Texture t2, Texture t3)
     gl.glColor3f(1.0f,1.0f,1.0f);
     //za³adowanie tekstury wczytanej wczeœniej z pliku krajobraz.bmp
     gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
+    
+    
+    
     gl.glBegin(GL.GL_QUADS);
     //œciana przednia
     gl.glNormal3f(0.0f,0.0f,-1.0f);
@@ -434,10 +455,10 @@ gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 // Reset the current matrix to the "identity"
 gl.glLoadIdentity();
 
-gl.glTranslatef(0.0f, 0.0f, -6.0f); //przesuniêcie o 6 jednostek
+//gl.glTranslatef(0.0f, 0.0f, -6.0f); //przesuniêcie o 6 jednostek
 gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó³ osi X
 gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó³ osi Y
-
+gl.glTranslatef(0.0f, 80.0f, 0.0f);
 gl.glEnable(GL.GL_LIGHTING); //uaktywnienie o?wietlenia
 //ustawienie parametrów ?ród³a ?wiat³a nr. 0
 gl.glLightfv(GL.GL_LIGHT0,GL.GL_AMBIENT,ambientLight,0); //swiat³o otaczajšce
@@ -446,10 +467,14 @@ gl.glLightfv(GL.GL_LIGHT0,GL.GL_SPECULAR,specular,0); //?wiat³o odbite
 gl.glLightfv(GL.GL_LIGHT0,GL.GL_POSITION,lightPos,0); //pozycja ?wiat³a
 gl.glEnable(GL.GL_LIGHT0); //uaktywnienie ?ród³a ?wiat³a nr. 0
 gl.glEnable(GL.GL_COLOR_MATERIAL); //uaktywnienie ?ledzenia kolorów
+
+gl.glTranslatef(x, 0.0f, z);
 Rysuj(gl, t1, t2, t3);
 //drzewko(gl);
 //lasek(gl);
-//koparka.Rysuj(gl);
+gl.glTranslatef(0.0f, -85.0f, 0.0f);
+gl.glScalef(4.0f, 4.0f, 4.0f);
+koparka.Rysuj(gl);
 //gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
 
 //gl.glColor3f(0.0f, 0.0f, 0.0f);
